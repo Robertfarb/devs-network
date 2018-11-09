@@ -1,5 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const users = require('./routes/api/users');
+const profile = require('./routes/api/profile');
+const posts = require('./routes/api/posts');
 
 // Initialize express app
 const app = express();
@@ -15,7 +18,12 @@ mongoose.connect(db)
 app.get('/', (req, res) => {
   res.send('Hello');
 });
-  
+
+//Routes
+app.use('/api/users', users);
+app.use('/api/profile', profile);
+app.use('/api/posts', posts);  
+
 // Start App on localhost:5000
 const port = process.env.PORT || 5000;
 
