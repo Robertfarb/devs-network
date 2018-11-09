@@ -21,7 +21,7 @@ mongoose.connect(db)
   .catch(err => console.log(err))
 
 app.get('/', (req, res) => {
-  res.send('Hello');
+  res.send('Hello, this is the root of my Dev Network Application :)');
 });
 
 //Routes
