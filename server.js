@@ -38,6 +38,6 @@ app.use('/api/profile', profile);
 app.use('/api/posts', posts);  
 
 // Start App on localhost:5000
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8000;
 
 app.listen(port, () => console.log(`server running on port ${port}`));
