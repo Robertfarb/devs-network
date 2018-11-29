@@ -53,5 +53,5 @@ const PostSchema = new Schema({
   }
 });
 
-Profile = mongoose.model("post", PostSchema);
-module.exports = PostSchema;
+Post = mongoose.model("post", PostSchema);
+module.exports = Post;
