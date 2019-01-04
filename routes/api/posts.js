@@ -114,6 +114,10 @@ router.post('/unlike/:id', passport.authenticate('jwt', { session: false }), (re
     })
 });
 
+// @route POST api/posts/unlike/:id
+// @desc Unlike post
+// @access Private
+
 
 
 module.exports = router;
