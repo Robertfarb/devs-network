@@ -92,22 +92,28 @@ router.post('/like/:post_id', passport.authenticate('jwt', { session: false }), 
 // @route POST api/posts/unlike/:id
 // @desc Unlike post
 // @access Private
-router.post('/unlike/:post_id', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.post('/unlike/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
   Profile.findOne({ user: req.user.id })
     .then(profile => {
-      Post.findById(req.params.post_id)
+      Post.findById(req.params.id)
         .then(post => {
           if (post.likes.filter(like => like.user.toString() === req.user.id).length === 0) {
             return res.status(400).json({ notLiked: 'You have not yet liked this post' });
           }
+          
+          // Find the user currently logged in to remove from the likes array
+          const removeIdx = post.likes
+            .map(item => item.user.toString())
+            .indexOf(req.user.id);
 
-          // Add user id to the likes array of a Post
-          post.likes.unshift({ user: req.user.id });
+          post.likes.splice(removeIdx, 1);
+
           post.save().then(post => res.json(post));
         })
         .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
     })
 });
+
 
 
 module.exports = router;
